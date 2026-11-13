@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+@theme {
+  --color-bg: #0A0F1A;
+  --color-surface: #111827;
+  --color-surface2: #1A2336;
+  --color-line: #243049;
+  --color-text: #E6EDF7;
+  --color-muted: #8A97B1;
+  --color-cyan: #22D3EE;
+  --color-amber: #FFB020;
+  --color-ok: #34D399;
+  --color-danger: #F87171;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-industrial: 6px;
+}
+
+body {
+  background-color: #0A0F1A;
+  color: #E6EDF7;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Rejilla Blueprint */
+.bg-grid-blueprint {
+  background-color: #0A0F1A;
+  background-image: 
+    linear-gradient(to right, rgba(36, 48, 73, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(36, 48, 73, 0.45) 1px, transparent 1px),
+    linear-gradient(to right, rgba(34, 211, 238, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+}
+
+/* Cinta de seguridad industrial */
+.cinta-seguridad {
+  background: repeating-linear-gradient(
+    45deg,
+    #FFB020,
+    #FFB020 10px,
+    #111827 10px,
+    #111827 20px
+  );
+  height: 6px;
+  width: 100%;
+}
