@@ -46,7 +46,7 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: '#0A0F1A' },
         }}
       >
-        <Stack.Screen name="index" />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </>
   );
