@@ -143,7 +143,7 @@ export default function RegistrosScreen() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          className="flex-row gap-1.5 mb-3 pb-1"
+          className="flex-row gap-1.5 mb-3 pb-1 flex-wrap"
         >
           <Pressable
             onPress={() => setFiltroCarrera('todas')}
