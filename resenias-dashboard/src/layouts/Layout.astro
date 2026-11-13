@@ -3,16 +3,23 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = 'Blueprint Industrial-Tech · UPTlax' } = Astro.props;
+const {
+  title = 'Voz Politécnica · Pertinencia de la Formación Académica UPTlax',
+  description = 'Instrumento académico para recolectar opiniones estudiantiles sobre la pertinencia de la formación profesional en la UPTlax (Grupo 7C).',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es" class="dark">
+<html lang="es-MX" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0A0F1A" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>

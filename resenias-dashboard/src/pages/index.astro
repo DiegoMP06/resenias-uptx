@@ -1,8 +1,66 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { PruebaBlueprint } from '../components/PruebaBlueprint';
+import { Pantalla } from '../components/blueprint/Pantalla';
+import { Chip } from '../components/blueprint/Chip';
+import { FormularioRespuesta } from '../components/FormularioRespuesta';
+import { Factory, Cpu, Shield } from 'lucide-react';
 ---
 
-<Layout title="Blueprint Industrial-Tech · Verificación Fase 1">
-  <PruebaBlueprint client:load />
+<Layout title="Voz Politécnica · UPTlax (Minería de Textos 7C)">
+  <Pantalla className="px-4 py-6 sm:py-10 max-w-4xl mx-auto">
+    <!-- Encabezado Compacto Blueprint Industrial-Tech -->
+    <header className="mb-8 border-b border-[#243049] pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <!-- Logo-glifo engrane + circuito -->
+          <div
+            class="w-12 h-12 rounded-[6px] bg-[#111827] border border-[#22D3EE] flex items-center justify-center text-[#22D3EE] shadow-[0_0_15px_rgba(34,211,238,0.2)] shrink-0"
+          >
+            <Factory className="w-6 h-6 text-[#FFB020]" />
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[10px] tracking-widest uppercase text-[#22D3EE]">
+                UPTLAX · MINERÍA DE TEXTOS 7C
+              </span>
+              <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-[#243049]"></span>
+              <span class="hidden sm:inline-block font-mono text-[10px] text-[#8A97B1] uppercase">
+                ESTUDIO ACADÉMICO
+              </span>
+            </div>
+            <h1 class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[#E6EDF7] mt-0.5">
+              Voz Politécnica
+            </h1>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <Chip estado="info" texto="RECOLECCIÓN ACTIVA" />
+        </div>
+      </div>
+
+      <p class="font-sans text-sm sm:text-base text-[#8A97B1] mt-3 max-w-2xl leading-relaxed">
+        Ayúdanos a conectar lo que estudias con lo que el trabajo te va a pedir. Tu opinión sincera impulsará el análisis de pertinencia educativa.
+      </p>
+
+      <!-- Cinta de seguridad industrial -->
+      <div class="cinta-seguridad mt-5 rounded-[2px]"></div>
+    </header>
+
+    <!-- Isla Interactiva de React con RHF + Zod -->
+    <main>
+      <FormularioRespuesta client:load />
+    </main>
+
+    <!-- Pie de página técnico -->
+    <footer class="mt-12 pt-6 border-t border-[#243049] text-center font-mono text-xs text-[#8A97B1] space-y-1">
+      <p>
+        UPTlax · Ingeniería en Tecnologías de la Información & Ingeniería Industrial
+      </p>
+      <p class="text-[11px] text-[#8A97B1]/80">
+        Proyecto de Minería de Textos (Grupo 7C) · Recolección anónima sin fines de lucro
+      </p>
+    </footer>
+  </Pantalla>
 </Layout>
