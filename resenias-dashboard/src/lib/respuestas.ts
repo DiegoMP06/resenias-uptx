@@ -1,5 +1,7 @@
 import crypto from 'node:crypto';
+import { eq, and, ne } from 'drizzle-orm';
 import { getDb, asegurarEsquema } from './db.ts';
+import { respuestas } from '../db/schema.ts';
 import { normalizarParaHash, detectarPosiblePii, type Registro } from '../shared/schema.ts';
 
 export interface ResultadoInsercion {
@@ -20,12 +22,13 @@ export async function guardarRespuesta(
   const db = getDb();
 
   // 1. Verificar si el id ya existía (idempotencia)
-  const existe = await db.execute({
-    sql: 'SELECT id FROM respuestas WHERE id = ? LIMIT 1',
-    args: [registro.id],
-  });
+  const existe = await db
+    .select({ id: respuestas.id })
+    .from(respuestas)
+    .where(eq(respuestas.id, registro.id))
+    .limit(1);
 
-  if (existe.rows.length > 0) {
+  if (existe.length > 0) {
     return {
       id: registro.id,
       guardado: false,
@@ -35,11 +38,13 @@ export async function guardarRespuesta(
 
   // 2. Calcular hash y detectar duplicado de contenido
   const hash = calcularHash(registro.respuesta);
-  const duplicadoRes = await db.execute({
-    sql: 'SELECT id FROM respuestas WHERE hash = ? AND id != ? LIMIT 1',
-    args: [hash, registro.id],
-  });
-  const posibleDuplicado = duplicadoRes.rows.length > 0 ? 1 : 0;
+  const duplicadoRes = await db
+    .select({ id: respuestas.id })
+    .from(respuestas)
+    .where(and(eq(respuestas.hash, hash), ne(respuestas.id, registro.id)))
+    .limit(1);
+
+  const posibleDuplicado = duplicadoRes.length > 0 ? 1 : 0;
 
   // 3. Detectar PII
   const hallazgosPii = detectarPosiblePii(registro.respuesta);
@@ -48,28 +53,23 @@ export async function guardarRespuesta(
   // 4. Recibido en servidor
   const recibidoEn = new Date().toISOString();
 
-  // 5. Inserción con ON CONFLICT por si entra en condición de carrera
-  await db.execute({
-    sql: `
-      INSERT INTO respuestas (
-        id, carrera, tsu, cuatrimestre, respuesta, fuente, hash, posible_duplicado, posible_pii, creado_en, recibido_en
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      ON CONFLICT(id) DO NOTHING
-    `,
-    args: [
-      registro.id,
-      registro.carrera,
-      registro.tsu,
-      registro.cuatrimestre,
-      registro.respuesta,
-      registro.fuente,
+  // 5. Inserción con Drizzle onConflictDoNothing
+  await db
+    .insert(respuestas)
+    .values({
+      id: registro.id,
+      carrera: registro.carrera,
+      tsu: registro.tsu,
+      cuatrimestre: registro.cuatrimestre,
+      respuesta: registro.respuesta,
+      fuente: registro.fuente,
       hash,
       posibleDuplicado,
       posiblePii,
-      registro.creadoEn,
+      creadoEn: registro.creadoEn,
       recibidoEn,
-    ],
-  });
+    })
+    .onConflictDoNothing({ target: respuestas.id });
 
   return {
     id: registro.id,

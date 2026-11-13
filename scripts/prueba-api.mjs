@@ -26,7 +26,7 @@ const { GET: getResumen } = await import(
 const { GET: getExportar } = await import(
   '../resenias-dashboard/src/pages/api/exportar.ts'
 );
-const { getDb, asegurarEsquema } = await import(
+const { getDb, getDbClient, asegurarEsquema } = await import(
   '../resenias-dashboard/src/lib/db.ts'
 );
 
@@ -50,8 +50,8 @@ async function ejecutarPruebas() {
 
   // Limpiar base de datos de prueba
   await asegurarEsquema();
-  const db = getDb();
-  await db.execute('DELETE FROM respuestas');
+  const dbClient = getDbClient();
+  await dbClient.execute('DELETE FROM respuestas');
 
   // -------------------------------------------------------------------
   // 1. CASOS DE ERROR Y VALIDACIÓN
@@ -133,7 +133,7 @@ async function ejecutarPruebas() {
     resHoneypot.status === 201,
     'Honeypot lleno debe devolver 201 para engañar al bot',
   );
-  const honeypotEnDb = await db.execute({
+  const honeypotEnDb = await dbClient.execute({
     sql: 'SELECT COUNT(*) as c FROM respuestas WHERE id = ?',
     args: [idHoneypot],
   });
@@ -238,7 +238,7 @@ async function ejecutarPruebas() {
   assert(totalAceptados === 120, 'Total de 120 registros aceptados con éxito');
 
   // Verificar recuento en base de datos
-  const countDb1 = await db.execute('SELECT COUNT(*) as c FROM respuestas');
+  const countDb1 = await dbClient.execute('SELECT COUNT(*) as c FROM respuestas');
   assert(Number(countDb1.rows[0].c) === 120, 'La base de datos contiene exactamente 120 registros');
 
   // -------------------------------------------------------------------
@@ -265,7 +265,7 @@ async function ejecutarPruebas() {
     );
   }
 
-  const countDb2 = await db.execute('SELECT COUNT(*) as c FROM respuestas');
+  const countDb2 = await dbClient.execute('SELECT COUNT(*) as c FROM respuestas');
   assert(
     Number(countDb2.rows[0].c) === 120,
     'COUNT(*) sigue siendo exactamente 120 (cero duplicados por reenvío)',

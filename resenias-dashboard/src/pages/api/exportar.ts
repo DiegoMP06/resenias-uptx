@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import ExcelJS from 'exceljs';
+import { eq, and, asc } from 'drizzle-orm';
 import { getDb, asegurarEsquema } from '../../lib/db.ts';
+import { respuestas } from '../../db/schema.ts';
 import { verificarBearerToken, obtenerAdminToken } from '../../lib/auth.ts';
 import { etiquetaCarrera, etiquetaTsu } from '../../shared/carreras.ts';
 
@@ -34,35 +36,34 @@ export const GET: APIRoute = async ({ request, url }) => {
     await asegurarEsquema();
     const db = getDb();
 
-    let sql = 'SELECT * FROM respuestas WHERE 1=1';
-    const args: any[] = [];
-
+    const condiciones = [];
     if (!incluirDuplicados) {
-      sql += ' AND posible_duplicado = 0';
+      condiciones.push(eq(respuestas.posibleDuplicado, 0));
     }
-
     if (carreraFiltro && carreraFiltro.trim() !== '') {
-      sql += ' AND carrera = ?';
-      args.push(carreraFiltro.trim());
+      condiciones.push(eq(respuestas.carrera, carreraFiltro.trim()));
     }
 
-    sql += ' ORDER BY creado_en ASC';
+    let baseQuery = db.select().from(respuestas);
+    if (condiciones.length > 0) {
+      baseQuery = baseQuery.where(and(...condiciones)) as any;
+    }
 
-    const resultados = await db.execute({ sql, args });
+    const resultados = await baseQuery.orderBy(asc(respuestas.creadoEn));
 
     // Preparar filas con folio R001...
-    const filas = resultados.rows.map((row, index) => {
+    const filas = resultados.map((row, index) => {
       const folio = 'R' + String(index + 1).padStart(3, '0');
       const carreraLegible = etiquetaCarrera(String(row.carrera));
       const tsuLegible = row.tsu ? etiquetaTsu(String(row.tsu)) : '';
       const cuatrimestre = Number(row.cuatrimestre);
       const respuesta = String(row.respuesta);
       const fuente = String(row.fuente);
-      const fecha = String(row.creado_en);
+      const fecha = String(row.creadoEn);
 
       const marcas: string[] = [];
-      if (Number(row.posible_duplicado) === 1) marcas.push('posible_duplicado');
-      if (row.posible_pii) marcas.push(`posible_pii:${row.posible_pii}`);
+      if (Number(row.posibleDuplicado) === 1) marcas.push('posible_duplicado');
+      if (row.posiblePii) marcas.push(`posible_pii:${row.posiblePii}`);
       const revision = marcas.join(',');
 
       return {

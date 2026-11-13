@@ -1,10 +1,13 @@
 import { createClient, type Client } from '@libsql/client';
+import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
+import * as schema from '../db/schema.ts';
 
-let dbClient: Client | null = null;
+let client: Client | null = null;
+let dbInstance: LibSQLDatabase<typeof schema> | null = null;
 let initialized = false;
 
-export function getDb(): Client {
-  if (dbClient) return dbClient;
+export function getDbClient(): Client {
+  if (client) return client;
 
   const url =
     process.env.TURSO_DATABASE_URL ||
@@ -14,19 +17,26 @@ export function getDb(): Client {
     process.env.TURSO_AUTH_TOKEN ||
     (import.meta as any).env?.TURSO_AUTH_TOKEN;
 
-  dbClient = createClient({
+  client = createClient({
     url,
     authToken,
   });
 
-  return dbClient;
+  return client;
+}
+
+export function getDb(): LibSQLDatabase<typeof schema> {
+  if (dbInstance) return dbInstance;
+  const rawClient = getDbClient();
+  dbInstance = drizzle(rawClient, { schema });
+  return dbInstance;
 }
 
 export async function asegurarEsquema(): Promise<void> {
   if (initialized) return;
-  const client = getDb();
+  const rawClient = getDbClient();
 
-  await client.execute(`
+  await rawClient.execute(`
     CREATE TABLE IF NOT EXISTS respuestas (
       id TEXT PRIMARY KEY,
       carrera TEXT NOT NULL,
@@ -42,13 +52,13 @@ export async function asegurarEsquema(): Promise<void> {
     );
   `);
 
-  await client.execute(`
+  await rawClient.execute(`
     CREATE INDEX IF NOT EXISTS idx_respuestas_hash ON respuestas(hash);
   `);
-  await client.execute(`
+  await rawClient.execute(`
     CREATE INDEX IF NOT EXISTS idx_respuestas_carrera ON respuestas(carrera);
   `);
-  await client.execute(`
+  await rawClient.execute(`
     CREATE INDEX IF NOT EXISTS idx_respuestas_creado_en ON respuestas(creado_en);
   `);
 
