@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Pantalla } from '../components/blueprint/Pantalla';
+import { PanelAdmin } from '../components/PanelAdmin';
+import { Factory } from 'lucide-react';
+
+export const prerender = false;
+---
+
+<Layout
+  title="Panel de Control · Voz Politécnica (UPTlax Admin)"
+  description="Panel de administración y supervisión de recolección para Minería de Textos UPTlax."
+>
+  <Pantalla className="px-4 py-6 sm:py-8 max-w-6xl mx-auto">
+    <!-- Encabezado del Tablero de Administración -->
+    <header className="mb-6 border-b border-[#243049] pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-[6px] bg-[#111827] border border-[#FFB020] flex items-center justify-center text-[#FFB020] shadow-[0_0_12px_rgba(255,176,32,0.2)] shrink-0"
+          >
+            <Factory className="w-5 h-5" />
+          </div>
+          <div>
+            <span class="font-mono text-[10px] tracking-widest uppercase text-[#FFB020]">
+              UPTLAX · MINERÍA DE TEXTOS 7C · PANEL DE CONTROL
+            </span>
+            <h1 class="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#E6EDF7]">
+              Tablero de Planta y Exportación
+            </h1>
+          </div>
+        </div>
+
+        <a
+          href="/"
+          class="font-mono text-xs text-[#22D3EE] hover:text-[#67E8F9] transition-colors flex items-center gap-1.5 self-start sm:self-auto"
+        >
+          <span>← Ir al formulario público</span>
+        </a>
+      </div>
+
+      <div class="cinta-seguridad mt-4 rounded-[2px]"></div>
+    </header>
+
+    <main>
+      <PanelAdmin client:load />
+    </main>
+
+    <footer class="mt-12 pt-4 border-t border-[#243049] text-center font-mono text-xs text-[#8A97B1]">
+      Panel de Supervisión · Conexión Turso / libSQL · UPTlax Minería de Textos
+    </footer>
+  </Pantalla>
+</Layout>

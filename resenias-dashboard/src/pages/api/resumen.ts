@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { count, eq, isNotNull, asc } from 'drizzle-orm';
+import { count, eq, isNotNull, asc, desc, or } from 'drizzle-orm';
 import { getDb, asegurarEsquema } from '../../lib/db.ts';
 import { respuestas } from '../../db/schema.ts';
 import { verificarBearerToken, obtenerAdminToken } from '../../lib/auth.ts';
@@ -121,6 +121,29 @@ export const GET: APIRoute = async ({ request }) => {
       total: Number(r.c),
     }));
 
+    // 6. Registros marcados para revisión manual (duplicados o con posible PII)
+    const marcados = await db
+      .select({
+        id: respuestas.id,
+        carrera: respuestas.carrera,
+        tsu: respuestas.tsu,
+        cuatrimestre: respuestas.cuatrimestre,
+        respuesta: respuestas.respuesta,
+        fuente: respuestas.fuente,
+        posibleDuplicado: respuestas.posibleDuplicado,
+        posiblePii: respuestas.posiblePii,
+        creadoEn: respuestas.creadoEn,
+      })
+      .from(respuestas)
+      .where(
+        or(
+          eq(respuestas.posibleDuplicado, 1),
+          isNotNull(respuestas.posiblePii),
+        ),
+      )
+      .orderBy(desc(respuestas.creadoEn))
+      .limit(100);
+
     return new Response(
       JSON.stringify({
         ok: true,
@@ -132,6 +155,7 @@ export const GET: APIRoute = async ({ request }) => {
         porCuatrimestre,
         porTsu,
         porFuente,
+        marcados,
       }),
       {
         status: 200,
