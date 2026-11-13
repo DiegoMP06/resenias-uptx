@@ -62,10 +62,10 @@ stmtInsert.run(
 
 stmtInsert.run(
   '00000000-0000-4000-8000-000000000003',
-  'MECATRONICA',
+  'INDUSTRIAL',
   null,
-  9,
-  'Falta mayor actualización en PLC industriales modernos y servomotores aplicados.',
+  10,
+  'Considero necesaria mayor vinculación con certificaciones industriales en Lean Manufacturing.',
   'app-1',
   new Date().toISOString()
 );
@@ -90,7 +90,7 @@ console.log('✓ Conteo por estado verificado (3 pendientes)');
 
 // 3. Conteo por carrera y TSU
 const carreras = db.prepare(`SELECT carrera, COUNT(*) as total FROM registros GROUP BY carrera`).all();
-assert.equal(carreras.length, 3);
+assert.equal(carreras.length, 2);
 
 const tsus = db.prepare(`SELECT tsu, COUNT(*) as total FROM registros WHERE tsu IS NOT NULL GROUP BY tsu`).all();
 assert.equal(tsus.length, 1);

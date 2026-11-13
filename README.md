@@ -7,11 +7,10 @@
 
 ## 🎯 1. Metas de Recolección Oficiales
 
-| Ingeniería | Meta de Respuestas | Requisito Especial |
-|---|:---:|---|
-| **Ingeniería Industrial** | **≈ 600** | Sin TSU |
-| **Ingeniería en Tecnologías de la Información** | **≈ 100** | TSU obligatorio (IA / Ciencia de Datos / Infraestructura de Redes) |
-| **Otras Ingenierías** (Mecatrónica, Química, Biotecnología, Automotriz, Financiera) | Abierta | Sin TSU |
+| Ingeniería | Meta de Respuestas | Requisito Especial | Cuatrimestres |
+|---|:---:|---|:---:|
+| **Ingeniería Industrial** | **≈ 600** | Sin TSU | 1° al 10° |
+| **Ingeniería en Tecnologías de la Información** | **≈ 100** | TSU obligatorio (IA / Ciencia de Datos / Infraestructura de Redes) | 1° al 10° |
 
 **Pregunta oficial intacta:**
 > *"¿Consideras que la formación que estás recibiendo en la UPTlax es pertinente y adecuada para las demandas y retos del campo laboral actual? ¿Por qué?"*

@@ -184,11 +184,7 @@ async function ejecutarPruebas() {
     { c: 'INDUSTRIAL', tsu: null },
     { c: 'TI', tsu: 'IA' },
     { c: 'TI', tsu: 'CIENCIA_DATOS' },
-    { c: 'MECATRONICA', tsu: null },
-    { c: 'QUIMICA', tsu: null },
-    { c: 'BIOTECNOLOGIA', tsu: null },
-    { c: 'AUTOMOTRIZ', tsu: null },
-    { c: 'FINANCIERA', tsu: null },
+    { c: 'TI', tsu: 'INFRAESTRUCTURA_REDES' },
   ];
 
   for (let i = 1; i <= 120; i++) {
@@ -201,7 +197,7 @@ async function ejecutarPruebas() {
       id: uuid,
       carrera: configCarrera.c,
       tsu: configCarrera.tsu,
-      cuatrimestre: (i % 11) + 1,
+      cuatrimestre: (i % 10) + 1,
       respuesta: `Respuesta de prueba #${i}: Considero que la formación académica en la UPTlax está altamente vinculada con el campo laboral industrial, aunque me gustaría mayor práctica en laboratorio.${extraPii}`,
       fuente: i % 2 === 0 ? 'web' : 'app-1',
       creadoEn: new Date(Date.now() - (120 - i) * 60000).toISOString(),

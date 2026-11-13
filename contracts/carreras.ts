@@ -1,7 +1,9 @@
 /**
  * Catálogo de carreras, TSU y cuatrimestres. ÚNICA fuente de verdad para web y app.
  *
- * 7 ingenierías de la Universidad Politécnica de Tlaxcala (UPTlax).
+ * Carreras del proyecto de investigación UPTlax:
+ * - Ingeniería Industrial (meta: 600)
+ * - Ingeniería en Tecnologías de la Información (meta: 100, pide TSU)
  */
 export interface Carrera {
   id: string;
@@ -22,11 +24,6 @@ export const CARRERAS: Carrera[] = [
     meta: 100,
     pideTsu: true,
   },
-  { id: 'MECATRONICA', etiqueta: 'Ingeniería Mecatrónica', corta: 'Mecatrónica', meta: 0 },
-  { id: 'QUIMICA', etiqueta: 'Ingeniería Química', corta: 'Química', meta: 0 },
-  { id: 'BIOTECNOLOGIA', etiqueta: 'Ingeniería en Biotecnología', corta: 'Biotecnología', meta: 0 },
-  { id: 'AUTOMOTRIZ', etiqueta: 'Ingeniería en Sistemas Automotrices', corta: 'Automotriz', meta: 0 },
-  { id: 'FINANCIERA', etiqueta: 'Ingeniería Financiera', corta: 'Financiera', meta: 0 },
 ];
 
 export const TSU_OPCIONES = [
@@ -35,7 +32,7 @@ export const TSU_OPCIONES = [
   { id: 'INFRAESTRUCTURA_REDES', etiqueta: 'Infraestructura de Redes' },
 ] as const;
 
-export const CUATRIMESTRES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
+export const CUATRIMESTRES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 
 export const CARRERA_IDS = CARRERAS.map((c) => c.id);
 export const TSU_IDS = TSU_OPCIONES.map((t) => t.id as string);

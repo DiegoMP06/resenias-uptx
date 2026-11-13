@@ -56,7 +56,7 @@ export const registroSchema = z
     id: z.string().regex(UUID_RE, 'id inválido'),
     carrera: z.string().refine((v) => CARRERA_IDS.includes(v)),
     tsu: z.string().nullable(),
-    cuatrimestre: z.number().int().min(1).max(11),
+    cuatrimestre: z.number().int().min(1).max(10),
     respuesta: z.string().trim().min(MIN_RESPUESTA).max(MAX_RESPUESTA),
     fuente: z.string().min(1).max(40), // 'web' | 'app-1' | 'app-2' ... (nunca identifica personas)
     creadoEn: z.string().min(10).max(40), // ISO 8601, hora del dispositivo al capturar

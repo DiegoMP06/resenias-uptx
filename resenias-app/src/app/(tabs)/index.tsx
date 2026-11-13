@@ -305,7 +305,7 @@ export default function CapturarScreen() {
             <Campo
               label="Cuatrimestre"
               requerido
-              ayuda="1° al 11°"
+              ayuda="1° al 10°"
               error={errors.cuatrimestre?.message}
             >
               <Controller

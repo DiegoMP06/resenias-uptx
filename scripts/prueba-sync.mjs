@@ -55,7 +55,7 @@ async function ejecutarAuditoria() {
   // 1. GENERACIÓN DE 120 REGISTROS CON UUID V4
   console.log('📦 1. Prueba de carga masiva por lotes (120 registros)...');
   const registros120 = [];
-  const carrerasList = ['INDUSTRIAL', 'TI', 'MECATRONICA', 'QUIMICA', 'BIOTECNOLOGIA', 'AUTOMOTRIZ', 'FINANCIERA'];
+  const carrerasList = ['INDUSTRIAL', 'TI'];
 
   for (let i = 1; i <= 120; i++) {
     const cId = carrerasList[i % carrerasList.length];
@@ -66,7 +66,7 @@ async function ejecutarAuditoria() {
       id: uuid,
       carrera: cId,
       tsu: esTi ? 'IA' : null,
-      cuatrimestre: (i % 11) + 1,
+      cuatrimestre: (i % 10) + 1,
       respuesta: `Opinión académica número ${i}: Considero que la preparación técnica recibida es pertinente para la industria actual.`,
       fuente: 'app-brigada-test',
       creadoEn: new Date(Date.now() - (120 - i) * 60000).toISOString(),
