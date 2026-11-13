@@ -15,7 +15,7 @@ Infraestructura de Redes), `cuatrimestre`, `respuesta`, y metadatos técnicos: `
 
 ## Alcance por parte
 
-### Web (`resenias-dashboard/`)
+### Web (`web/`)
 - **Formulario público** `/` — mobile-first, un solo paso: consentimiento → carrera → (TSU si TI) → cuatrimestre → pregunta oficial.
   Contador de caracteres, validación en vivo (RHF + Zod), estado de envío, pantalla de gracias con opción "Responder otra vez" (para
   uso en tablet/celular compartido). Honeypot oculto.
@@ -25,7 +25,7 @@ Infraestructura de Redes), `cuatrimestre`, `respuesta`, y metadatos técnicos: `
   (con filtro por carrera) y tabla de revisión de registros marcados.
 - **Despliegue** en Vercel (Hobby) con Turso.
 
-### App (`resenias-app/`)
+### App (`app/`)
 - **Nueva respuesta** (modo entrevista): mismo formulario; al guardar → pantalla "¡Gracias!" → vuelve al formulario en blanco listo
   para el siguiente alumno. Funciona 100 % sin internet (guarda en SQLite con estado `pendiente`).
 - **Registros:** lista con estado (pendiente/enviado/error), filtro por estado y carrera; ver detalle; borrar solo registros *pendientes*
@@ -50,5 +50,5 @@ foto/video/audio (se toma con la cámara del celular fuera de la app), modo oscu
 5. La pregunta del formulario coincide **carácter por carácter** con `PREGUNTA_OFICIAL`.
 6. TSU aparece y es obligatorio solo cuando la carrera es TI; no aparece en las demás.
 7. Nada de datos personales en la base, logs ni exportación (más allá de lo que el alumno escriba y quede marcado para revisión).
-8. `npm run build` y `npm run typecheck` sin errores en `resenias-dashboard/` y `resenias-app/`; la web desplegada responde en < 2 s en 4G.
+8. `npm run build` y `npm run typecheck` sin errores en `web/` y `app/`; la web desplegada responde en < 2 s en 4G.
 9. Misma identidad visual en web y app (ver `docs/DISENO.md`).

@@ -45,7 +45,7 @@ recolector-uptlax-kit/
 ## 3. Puesta en marcha
 
 1. **Descomprime** el zip y renombra la carpeta como quieras (ej. `recolector-uptlax`).
-2. En Antigravity: **File → Open Folder** y abre **la carpeta raíz** (la que contiene `AGENTS.md`). `resenias-dashboard/` y `resenias-app/` se crean dentro en la Fase 1.
+2. En Antigravity: **File → Open Folder** y abre **la carpeta raíz** (la que contiene `AGENTS.md`). `web/` y `app/` se crean dentro en la Fase 1.
 3. Comprueba que Antigravity reconoce los archivos: abre el panel de **Customizations / Rules / Workflows / Skills** (el nombre cambia entre versiones) y revisa que aparezcan
    la regla `00-reglas-proyecto`, los 4 skills y los 7 workflows. Si tu versión no los detecta, ver "Si algo no aparece" más abajo.
 4. Abre el chat del Agente en modo **Planning** y **pega el contenido de `PROMPT-MAESTRO.md`**. El agente leerá todo, te hará preguntas (por ejemplo, las 2 ingenierías que faltan en `carreras.ts`)
@@ -54,8 +54,9 @@ recolector-uptlax-kit/
 
 | Orden | Comando | Qué obtienes | Cómo lo pruebas |
 |---|---|---|---|
-| 1 | *(prompt maestro)* o `/01-fundacion` | `resenias-dashboard/` y `resenias-app/` creados, tokens y componentes de diseño | `npm run dev` en `resenias-dashboard/`, `npx expo start` en `resenias-app/` |
+| 1 | *(prompt maestro)* o `/01-fundacion` | `web/` y `app/` creados, tokens y componentes de diseño | `npm run dev` en `web/`, `npx expo start` en `app/` |
 | 2 | `/02-backend-api` | Base Turso + API + exportación | `node scripts/prueba-api.mjs` |
+| 2b | `/02b-migrar-a-drizzle` | *(solo si ya hiciste el 2 sin Drizzle)* mismo backend, ahora con Drizzle | `prueba-api.mjs` igual que antes |
 | 3 | `/03-web-formulario` | Formulario público listo | Abrirlo en tu celular (misma red) y enviar una respuesta |
 | 4 | `/04-admin-exportacion` | `/admin` con avance y descargas CSV/Excel | Entrar con `ADMIN_TOKEN`, descargar y abrir en Excel |
 | 5 | `/05-app-captura-offline` | App con captura sin internet | Modo avión → capturar 20 → cerrar y abrir |
@@ -65,9 +66,9 @@ recolector-uptlax-kit/
 **Una fase por conversación nueva** (así el agente no arrastra contexto viejo ni gasta tu cuota). Haz un `git commit` al terminar cada fase.
 
 ## 4. Preparar Turso y Vercel (se te pedirá en la Fase 2 y 7)
-- **Turso:** crea una base (ej. `recolector`), copia su **URL** (`libsql://…`) y genera un **token**. Ponlos en `resenias-dashboard/.env` como `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN`.
+- **Turso:** crea una base (ej. `recolector`), copia su **URL** (`libsql://…`) y genera un **token**. Ponlos en `web/.env` como `TURSO_DATABASE_URL` y `TURSO_AUTH_TOKEN`.
 - **Secretos propios:** inventa dos cadenas largas y aleatorias: `SYNC_TOKEN` (la usará la app) y `ADMIN_TOKEN` (para `/admin` y la exportación). No los subas a GitHub.
-- **Vercel:** importa tu repositorio, define como **Root Directory** `resenias-dashboard`, agrega las 4 variables y despliega. Pon la URL resultante en **Ajustes** de la app,
+- **Vercel:** importa tu repositorio, define como **Root Directory** `web`, agrega las 4 variables y despliega. Pon la URL resultante en **Ajustes** de la app,
   junto con el `SYNC_TOKEN`.
 
 ## 5. Consejos para que salga bien

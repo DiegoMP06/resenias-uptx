@@ -6,7 +6,7 @@ description: Aplica la identidad visual "Blueprint Industrial-Tech" (cuadrícula
 # Skill: diseño Blueprint Industrial-Tech
 
 ## Cuándo usarlo
-Cada vez que crees UI en `resenias-dashboard/` o `resenias-app/`: layouts, formularios, tarjetas, botones, tablas, estados vacíos, pantallas de carga/éxito/error.
+Cada vez que crees UI en `web/` o `app/`: layouts, formularios, tarjetas, botones, tablas, estados vacíos, pantallas de carga/éxito/error.
 
 ## Pasos
 1. Lee `docs/DISENO.md` completo (paleta, tipografía, motivos, componentes, tono).

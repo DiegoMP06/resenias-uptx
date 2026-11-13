@@ -8,10 +8,10 @@
 Vas a construir, **por fases**, una herramienta académica de recolección de datos para un proyecto de Minería de Textos de la UPTlax
 (grupo 7C, tema: *pertinencia de la formación académica*). Son **dos proyectos independientes** dentro de este workspace:
 
-- `resenias-dashboard/` → **Astro** (modo servidor, desplegado en **Vercel**) con isla de **React**, **Tailwind**, **React Hook Form + Zod**, base **Turso** (libSQL, plan gratis),
+- `web/` → **Astro** (modo servidor, desplegado en **Vercel**) con isla de **React**, **Tailwind**, **React Hook Form + Zod**, base **Turso** (libSQL, plan gratis) con **Drizzle ORM** (se agrega en la Fase 2),
   API propia, panel `/admin` y exportación **CSV/XLSX**.
-- `resenias-app/` → **Expo (React Native)** con **NativeWind**, **React Hook Form + Zod** y **SQLite local** (`expo-sqlite`) para capturar **sin internet** y
-  sincronizar después a la API de `resenias-dashboard/` sin duplicar registros (UUID generado en el cliente + upsert en el servidor).
+- `app/` → **Expo (React Native)** con **NativeWind**, **React Hook Form + Zod** y **SQLite local** (`expo-sqlite`) para capturar **sin internet** y
+  sincronizar después a la API de `web/` sin duplicar registros (UUID generado en el cliente + upsert en el servidor).
 
 Meta de recolección: ≈ 600 respuestas de Ingeniería Industrial y ≈ 100 de Ingeniería en TI. En TI se captura además el **TSU/especialidad**:
 Inteligencia Artificial, Ciencia de Datos o Infraestructura de Redes. Todo debe correr en **planes gratuitos**.

@@ -4,12 +4,14 @@ description: Fase 2 — Base de datos Turso y API (respuestas, sincronizar, resu
 
 # /02-backend-api
 
-Objetivo: backend completo y probado con `curl`, sin UI todavía. Trabaja en `resenias-dashboard/`.
+Objetivo: backend completo y probado con `curl`, sin UI todavía. Trabaja en `web/`.
 
 1. Lee `contracts/API.md` y el skill `astro-vercel-turso` (pasos 2–5).
-2. Crea `src/lib/db.ts`, `scripts/migrate.mjs` y `.env.example` (`TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `SYNC_TOKEN`, `ADMIN_TOKEN`).
-   Indica al usuario cómo crear la base en Turso (CLI o panel) y pedirle que llene `.env`. **No inventes credenciales.**
-3. Implementa `POST /api/respuestas`, `POST /api/sincronizar`, `GET /api/resumen`, `GET /api/exportar` según el contrato
+2. **Agrega Drizzle ORM** (`drizzle-orm`, y `drizzle-kit` como dependencia de desarrollo) y crea `src/db/schema.ts`, `src/lib/db.ts`, `drizzle.config.ts`
+   y los scripts `db:generate` / `db:migrate`, siguiendo el paso 2 del skill `astro-vercel-turso`. Crea también `.env.example`
+   (`TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, `SYNC_TOKEN`, `ADMIN_TOKEN`).
+   Indica al usuario cómo crear la base en Turso (CLI o panel) y pedirle que llene `.env`. **No inventes credenciales.** Genera y aplica la migración inicial.
+3. Con Drizzle (sin SQL suelto), implementa `POST /api/respuestas`, `POST /api/sincronizar`, `GET /api/resumen`, `GET /api/exportar` según el contrato
    (hash, duplicados, PII marcada, upsert idempotente, folio al exportar, CSV con BOM y XLSX).
 4. Escribe `scripts/prueba-api.mjs` que: valida casos de error (TI sin TSU, texto corto, token malo), inserta 120 registros por lotes de 50,
    repite el envío (sin duplicados), y descarga el CSV y el XLSX comprobando el BOM, el folio `R001` y los acentos.

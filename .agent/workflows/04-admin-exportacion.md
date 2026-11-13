@@ -4,7 +4,7 @@ description: Fase 4 — Panel /admin con resumen, medidores de avance y descarga
 
 # /04-admin-exportacion
 
-Objetivo: que el usuario vea el avance y descargue el dataset. Trabaja en `resenias-dashboard/`.
+Objetivo: que el usuario vea el avance y descargue el dataset. Trabaja en `web/`.
 
 1. Lee el skill `astro-vercel-turso` (paso 6) y `docs/DISENO.md` (pantalla `/admin`).
 2. Página `/admin` (`noindex`, `no-store`): pide `ADMIN_TOKEN` (solo `sessionStorage`), llama `/api/resumen` con `Authorization: Bearer`.

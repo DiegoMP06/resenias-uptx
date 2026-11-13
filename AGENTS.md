@@ -13,15 +13,16 @@ Eres el equipo de desarrollo de una herramienta **académica** para recolectar r
 ```
 /                      ← carpeta abierta en Antigravity
 ├── AGENTS.md  docs/  contracts/  .agent/
-├── resenias-dashboard/               ← proyecto Astro (SSR, Vercel): formulario, API, DB, admin, exportación
-└── resenias-app/               ← proyecto Expo (React Native): captura offline con SQLite + sincronización
+├── web/               ← proyecto Astro (SSR, Vercel): formulario, API, DB, admin, exportación
+└── app/               ← proyecto Expo (React Native): captura offline con SQLite + sincronización
 ```
-`resenias-dashboard/` y `resenias-app/` son proyectos independientes (cada uno con su `package.json`). Cada uno tiene una copia de `contracts/`
-en `src/shared/` (`resenias-dashboard/src/shared`, `resenias-app/src/shared`). Sincroniza con `node scripts/sync-contracts.mjs` y no edites las copias a mano.
+`web/` y `app/` son proyectos independientes (cada uno con su `package.json`). Cada uno tiene una copia de `contracts/`
+en `src/shared/` (`web/src/shared`, `app/src/shared`). Sincroniza con `node scripts/sync-contracts.mjs` y no edites las copias a mano.
 
 ## Stack (fijo; no cambiar sin pedir permiso)
 - **Web:** Astro 5 (modo `server`, adaptador `@astrojs/vercel`), islands de React, Tailwind CSS, React Hook Form + Zod
-  (`@hookform/resolvers`), `@libsql/client` contra **Turso**, `exceljs` para .xlsx.
+  (`@hookform/resolvers`), **Drizzle ORM** (`drizzle-orm` + `drizzle-kit`) sobre `@libsql/client` contra **Turso**, `exceljs` para .xlsx.
+  El esquema de la tabla vive en `web/src/db/schema.ts` y debe coincidir con `contracts/API.md`. Sin SQL suelto salvo en migraciones generadas.
 - **App:** Expo (SDK estable actual) + Expo Router, NativeWind, React Hook Form + Zod, `expo-sqlite`,
   `@react-native-community/netinfo`, `expo-crypto`, `expo-file-system`, `expo-sharing`.
 - TypeScript estricto en ambos. Gestor de paquetes: `npm` (salvo que el usuario indique otro).

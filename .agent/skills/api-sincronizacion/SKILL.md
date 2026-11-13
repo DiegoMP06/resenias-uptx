@@ -1,6 +1,6 @@
 ---
 name: api-sincronizacion
-description: Garantiza que web, app y servidor respeten el mismo contrato (esquemas Zod, API, idempotencia por UUID, folios al exportar). Úsalo al tocar contracts/, endpoints, sincronización o exportación, y para auditar que no haya divergencias entre resenias-dashboard/ y resenias-app/.
+description: Garantiza que web, app y servidor respeten el mismo contrato (esquemas Zod, API, idempotencia por UUID, folios al exportar). Úsalo al tocar contracts/, endpoints, sincronización o exportación, y para auditar que no haya divergencias entre web/ y app/.
 ---
 
 # Skill: contrato y sincronización
@@ -11,9 +11,9 @@ description: Garantiza que web, app y servidor respeten el mismo contrato (esque
 
 ## Pasos
 1. Fuente de verdad: `contracts/schema.ts`, `carreras.ts`, `pregunta.ts`, `API.md`. Cualquier cambio se hace ahí y luego se propaga con
-   `node scripts/sync-contracts.mjs` (copia a `resenias-dashboard/src/shared/` y `resenias-app/src/shared/`).
+   `node scripts/sync-contracts.mjs` (copia a `web/src/shared/` y `app/src/shared/`).
 2. Auditoría rápida (ejecútala y reporta):
-   - `diff -r contracts resenias-dashboard/src/shared` y `diff -r contracts resenias-app/src/shared` (ignorando `API.md`) → sin diferencias.
+   - `diff -r contracts web/src/shared` y `diff -r contracts app/src/shared` (ignorando `API.md`) → sin diferencias.
    - La cadena de la pregunta en el formulario web y en la app es **idéntica** a `PREGUNTA_OFICIAL` (búscala con `grep` y compara).
    - Los códigos de estado y formas JSON de los endpoints coinciden con `API.md`.
    - La app marca `enviado` solo con `aceptados`; un `id` repetido se trata como aceptado.

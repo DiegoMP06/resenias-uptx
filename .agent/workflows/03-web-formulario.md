@@ -4,7 +4,7 @@ description: Fase 3 — Formulario web público (Astro + React Hook Form) con el
 
 # /03-web-formulario
 
-Objetivo: la página `/` lista para que los alumnos respondan desde el celular. Trabaja en `resenias-dashboard/`.
+Objetivo: la página `/` lista para que los alumnos respondan desde el celular. Trabaja en `web/`.
 
 1. Lee `docs/DISENO.md` (pantallas clave), `contracts/pregunta.ts` y `contracts/schema.ts`.
 2. Crea la isla de React `FormularioRespuesta` (`client:load`) con React Hook Form + `zodResolver(formularioSchema)`:

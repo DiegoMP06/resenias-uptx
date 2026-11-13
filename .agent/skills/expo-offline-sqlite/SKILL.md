@@ -1,12 +1,12 @@
 ---
 name: expo-offline-sqlite
-description: Construye la app Expo con NativeWind, formulario RHF+Zod, cola offline en expo-sqlite, sincronización por lotes idempotente y exportación CSV local. Úsalo para tareas en la carpeta resenias-app/.
+description: Construye la app Expo con NativeWind, formulario RHF+Zod, cola offline en expo-sqlite, sincronización por lotes idempotente y exportación CSV local. Úsalo para tareas en la carpeta app/.
 ---
 
 # Skill: Expo + SQLite offline
 
 ## Cuándo usarlo
-Al crear `resenias-app/`, la persistencia local, la sincronización, el resumen o la exportación desde el celular.
+Al crear `app/`, la persistencia local, la sincronización, el resumen o la exportación desde el celular.
 
 ## Pasos
 1. **Proyecto:** crea la app Expo con TypeScript y Expo Router (plantilla vigente). Agrega NativeWind (sigue la guía oficial para tu versión de Expo/Tailwind),
@@ -34,4 +34,4 @@ Al crear `resenias-app/`, la persistencia local, la sincronización, el resumen 
 - La exportación en `.xlsx` se hace en la web; la app exporta CSV (Excel lo abre).
 
 ## Salida esperada
-Código completo en `resenias-app/`, `README` con comandos (`npx expo start`, build), y la lista de pruebas manuales ejecutadas con su resultado.
+Código completo en `app/`, `README` con comandos (`npx expo start`, build), y la lista de pruebas manuales ejecutadas con su resultado.

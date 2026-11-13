@@ -4,7 +4,7 @@ description: Fase 5 — App Expo: captura sin internet con SQLite, lista de regi
 
 # /05-app-captura-offline
 
-Objetivo: capturar y consultar registros 100 % sin red. Trabaja en `resenias-app/`. **Aún sin sincronización.**
+Objetivo: capturar y consultar registros 100 % sin red. Trabaja en `app/`. **Aún sin sincronización.**
 
 1. Lee el skill `expo-offline-sqlite` (pasos 2, 3 y 6) y `docs/DISENO.md`.
 2. Base SQLite con migraciones y repositorio tipado (`registros`, `ajustes`).

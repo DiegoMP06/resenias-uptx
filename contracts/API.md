@@ -19,6 +19,7 @@ Base URL: la de Vercel (ej. `https://recolector-uptlax.vercel.app`). Todas las r
 | `recibido_en` | TEXT NOT NULL | ISO 8601 del servidor |
 
 Índices: `hash`, `carrera`, `creado_en`.
+ORM: **Drizzle** (`web/src/db/schema.ts`). Si cambias este contrato, actualiza el esquema y genera una nueva migración.
 **Nunca** guardar IP, user-agent, device id, correo, nombre ni matrícula.
 
 ## Endpoints
