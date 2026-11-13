@@ -3,7 +3,4 @@ const { withNativeWind } = require('nativewind/metro');
 
 const config = getDefaultConfig(__dirname);
 
-// Soporte para archivos WebAssembly requeridos por expo-sqlite en web
-config.resolver.assetExts.push('wasm');
-
 module.exports = withNativeWind(config, { input: './src/global.css' });

@@ -321,13 +321,13 @@ async function ejecutarPruebas() {
 
   const primeraFila = lineasCsv[1];
   assert(
-    primeraFila.startsWith('R001'),
+    primeraFila.startsWith('R001') || primeraFila.startsWith('"R001"'),
     `Primer registro tiene folio R001 consecutivo (valor: ${primeraFila.slice(0, 10)})`,
   );
 
   const ultimaFila = lineasCsv[120];
   assert(
-    ultimaFila.startsWith('R120'),
+    ultimaFila.startsWith('R120') || ultimaFila.startsWith('"R120"'),
     `Último registro tiene folio R120 (valor: ${ultimaFila.slice(0, 10)})`,
   );
 

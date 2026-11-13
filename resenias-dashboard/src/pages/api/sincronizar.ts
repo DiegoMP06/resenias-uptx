@@ -39,14 +39,12 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  // 4. Validar formato general de lote
-  const validacionLote = loteSchema.safeParse(body);
-  if (!validacionLote.success) {
+  // 4. Validar formato general de lote (debe ser un arreglo de 1 a 50 elementos)
+  if (!body || !Array.isArray(body.registros) || body.registros.length < 1 || body.registros.length > 50) {
     return new Response(
       JSON.stringify({
         ok: false,
         mensaje: 'Estructura de lote inválida. Debe incluir un arreglo "registros" de 1 a 50 elementos.',
-        errores: validacionLote.error.issues,
       }),
       { status: 400, headers: { 'Content-Type': 'application/json' } },
     );
@@ -56,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
   const rechazados: { id: string; motivo: string }[] = [];
 
   // 5. Procesar registros uno a uno
-  for (const item of validacionLote.data.registros) {
+  for (const item of body.registros) {
     const valReg = registroSchema.safeParse(item);
     if (!valReg.success) {
       rechazados.push({

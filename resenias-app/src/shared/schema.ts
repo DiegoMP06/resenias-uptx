@@ -1,6 +1,6 @@
 /**
  * Esquemas Zod compartidos por web (Astro), app (Expo) y servidor (API).
- * Copiar este archivo (junto con carreras.ts y pregunta.ts) a `resenias-dashboard/src/shared/` y `resenias-app/src/shared/`.
+ * Copiar este archivo (junto con carreras.ts y pregunta.ts) a `web/src/shared/` y `app/src/shared/`.
  * Nunca editar una copia sin editar la otra: mantener idénticas con `scripts/sync-contracts.mjs`.
  */
 import { z } from 'zod';

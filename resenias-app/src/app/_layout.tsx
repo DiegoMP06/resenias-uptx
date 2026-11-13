@@ -14,6 +14,7 @@ import {
   JetBrainsMono_500Medium,
 } from '@expo-google-fonts/jetbrains-mono';
 import { View } from 'react-native';
+import { iniciarSincronizadorAutomatico } from '@/sync/autoSync';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,6 +33,13 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
+
+  useEffect(() => {
+    const cancelarAutoSync = iniciarSincronizadorAutomatico();
+    return () => {
+      cancelarAutoSync();
+    };
+  }, []);
 
   if (!fontsLoaded && !fontError) {
     return <View className="flex-1 bg-[#0A0F1A]" />;

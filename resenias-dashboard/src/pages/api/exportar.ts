@@ -9,12 +9,9 @@ import { etiquetaCarrera, etiquetaTsu } from '../../shared/carreras.ts';
 export const prerender = false;
 
 function escaparCsvCampo(val: any): string {
-  if (val === null || val === undefined) return '';
+  if (val === null || val === undefined) return '""';
   const str = String(val);
-  if (str.includes('"') || str.includes(',') || str.includes('\n') || str.includes('\r')) {
-    return `"${str.replace(/"/g, '""')}"`;
-  }
-  return str;
+  return `"${str.replace(/"/g, '""')}"`;
 }
 
 export const GET: APIRoute = async ({ request, url }) => {
@@ -28,9 +25,10 @@ export const GET: APIRoute = async ({ request, url }) => {
     );
   }
 
-  const formato = (url.searchParams.get('formato') || 'csv').toLowerCase();
-  const carreraFiltro = url.searchParams.get('carrera');
-  const incluirDuplicados = url.searchParams.get('duplicados') === '1';
+  const parsedUrl = url || new URL(request.url);
+  const formato = (parsedUrl.searchParams.get('formato') || 'csv').toLowerCase();
+  const carreraFiltro = parsedUrl.searchParams.get('carrera');
+  const incluirDuplicados = parsedUrl.searchParams.get('duplicados') === '1';
 
   try {
     await asegurarEsquema();

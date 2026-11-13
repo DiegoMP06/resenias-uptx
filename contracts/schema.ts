@@ -4,7 +4,7 @@
  * Nunca editar una copia sin editar la otra: mantener idénticas con `scripts/sync-contracts.mjs`.
  */
 import { z } from 'zod';
-import { CARRERA_IDS, TSU_IDS, CUATRIMESTRES, carreraPideTsu } from './carreras';
+import { CARRERA_IDS, TSU_IDS, CUATRIMESTRES, carreraPideTsu } from './carreras.ts';
 
 export const MIN_RESPUESTA = 40;
 export const MAX_RESPUESTA = 4000;
